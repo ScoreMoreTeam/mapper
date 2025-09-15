@@ -1,5 +1,6 @@
 <body>
     <h1>Instrukcja uruchomienia projektu</h1>
+    <h2>Wymagania: python 3.10.2 i pip</h2>
     <ol>
         <li>
             <strong>Sklonuj repozytorium</strong><br>
