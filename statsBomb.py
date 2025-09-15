@@ -1,8 +1,27 @@
 import json
 import os
 
+def get_leauges() -> str:
+    result_file_path = "mapper/data/"
+    file_path_base = "statsbomb-opendata/open-data/data/"
+    folder_matches_path = file_path_base + "matches"
 
-def get_sb_players_teams():
+    with open(file_path_base + "competitions.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    #Pobranie i zapisanie lig
+    competitions_list = [comp for comp in data]
+    comps = {str(c['competition_id']): c['competition_name'] for c in competitions_list}
+    leauges_file = os.path.join(result_file_path, f"leauges.json")
+    print(comps)
+
+    os.makedirs(os.path.dirname(leauges_file), exist_ok=True)
+    with open(leauges_file, "w", encoding="utf-8") as f:
+        json.dump(comps, f, ensure_ascii=False, indent=4)
+
+    return leauges_file
+
+def get_players_teams():
     result_file_path = "mapper/data/"
     file_path_base = "statsbomb-opendata/open-data/data/"
     folder_matches_path = file_path_base + "matches"
@@ -19,7 +38,7 @@ def get_sb_players_teams():
     print("competition")
     print(competition)
 
-    competiton_matches_season_folder = folder_matches_path + "/" + str(competition["competition_id"]) + "/" + str(competition["season_id"])
+    competiton_matches_season_folder = folder_matches_path + "/" + str(competition["competition_id"]) + "/" + str(competition["season_id"] + "_statsbomb")
     with open(competiton_matches_season_folder + ".json", "r", encoding="utf-8") as f:
         data = json.load(f)
     match_ids = [match["match_id"] for match in data]
@@ -36,7 +55,7 @@ def get_sb_players_teams():
                     players[player["player_id"]] = player["player_name"] 
 
 
-    teams_file = os.path.join(result_file_path, f"teams_{leauge_name}.json")
+    teams_file = os.path.join(result_file_path, f"teams_{leauge_name}_statsbomb.json")
     players_file = os.path.join(result_file_path, f"players_{leauge_name}.json")
 
     os.makedirs(os.path.dirname(teams_file), exist_ok=True)
