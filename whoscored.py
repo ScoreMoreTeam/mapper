@@ -1,17 +1,26 @@
+import json
+from pathlib import Path
+import time
 from typing import List
+import pandas as pd
 import soccerdata as sd
 
-def get_whoscored_teams(whoscored: sd.WhoScored) -> List[str]:
+def get_whoscored_teams(whoscored: sd.WhoScored, leauge: str, season: str) -> List[str]:
     schedule = whoscored.read_schedule()
-    teams = schedule["home_team"].drop_duplicates().sort_values().tolist()
+
+    Path(f"data/csv/{leauge}/{season}/whoscored").mkdir(parents=True, exist_ok=True)
+
+    schedule = schedule.reset_index()
+    schedule.to_csv(f"data/csv/{leauge}/{season}/whoscored/teams.csv", index=False)
+
+    Path(f"data/json/{leauge}/{season}/whoscored").mkdir(parents=True, exist_ok=True)
+    teams = (
+        schedule[["home_team", "home_team_id"]]
+            .drop_duplicates()
+            .sort_values(by="home_team")
+            .rename(columns={"home_team_id": "id",  "home_team": "team_name"})       
+    )
+    teams.to_json(f'data/json/{leauge}/{season}/whoscored/teams.json', orient='records', force_ascii=False, indent=4)
+
+    print(teams)
     return teams
-
-def get_whoscored_leauges(whoscored: sd.WhoScored):
-    seasons = whoscored.read_leagues()
-    print(seasons.head())  # podgląd kolumn
-
-def get_whoscored_players(whoscored: sd.WhoScored) -> list[str]:
-    players_df = whoscored.read_player_season_stats(stat_type="standard")
-    players_list = players_df.index.get_level_values("player").unique().tolist()
-    return players_list
-

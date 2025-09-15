@@ -21,7 +21,7 @@ def get_leauges() -> str:
 
     return leauges_file
 
-def get_players_teams():
+def get_players_teams(leauge: str, season: str):
     result_file_path = "mapper/data/"
     file_path_base = "statsbomb-opendata/open-data/data/"
     folder_matches_path = file_path_base + "matches"
@@ -29,10 +29,7 @@ def get_players_teams():
     with open(file_path_base + "competitions.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    #Wartosci do zmiany
-    leauge_name = "La Liga" 
-    season = "2020/2021"
-    competitions_list = [comp for comp in data if comp["season_name"] == season and comp["competition_name"] == leauge_name]
+    competitions_list = [comp for comp in data if comp["season_name"] == season and comp["competition_name"] == leauge]
 
     competition = competitions_list[0]
     print("competition")
@@ -55,8 +52,8 @@ def get_players_teams():
                     players[player["player_id"]] = player["player_name"] 
 
 
-    teams_file = os.path.join(result_file_path, f"teams_{leauge_name}_statsbomb.json")
-    players_file = os.path.join(result_file_path, f"players_{leauge_name}.json")
+    teams_file = os.path.join(result_file_path, f"teams_{leauge}_statsbomb.json")
+    players_file = os.path.join(result_file_path, f"players_{leauge}.json")
 
     os.makedirs(os.path.dirname(teams_file), exist_ok=True)
     os.makedirs(os.path.dirname(players_file), exist_ok=True)
