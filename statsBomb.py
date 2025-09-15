@@ -1,9 +1,10 @@
 import json
 import os
+from pathlib import Path
 
 def get_leauges() -> str:
-    result_file_path = "mapper/data/"
-    file_path_base = "statsbomb-opendata/open-data/data/"
+    result_file_path = "data/json/statsbomb/"
+    file_path_base = "../statsbomb-opendata/open-data/data/"
     folder_matches_path = file_path_base + "matches"
 
     with open(file_path_base + "competitions.json", "r", encoding="utf-8") as f:
@@ -22,8 +23,8 @@ def get_leauges() -> str:
     return leauges_file
 
 def get_players_teams(leauge: str, season: str):
-    result_file_path = "mapper/data/"
-    file_path_base = "statsbomb-opendata/open-data/data/"
+    result_file_path = "data/json/statsbomb/"
+    file_path_base = "../statsbomb-opendata/open-data/data/"
     folder_matches_path = file_path_base + "matches"
 
     with open(file_path_base + "competitions.json", "r", encoding="utf-8") as f:
@@ -35,7 +36,10 @@ def get_players_teams(leauge: str, season: str):
     print("competition")
     print(competition)
 
-    competiton_matches_season_folder = folder_matches_path + "/" + str(competition["competition_id"]) + "/" + str(competition["season_id"] + "_statsbomb")
+    Path(f"data/json/statsbomb").mkdir(parents=True, exist_ok=True)
+
+    competiton_matches_season_folder = folder_matches_path + "/" + str(competition["competition_id"]) + "/" + str(competition["season_id"])
+    print(competiton_matches_season_folder)
     with open(competiton_matches_season_folder + ".json", "r", encoding="utf-8") as f:
         data = json.load(f)
     match_ids = [match["match_id"] for match in data]
@@ -52,8 +56,8 @@ def get_players_teams(leauge: str, season: str):
                     players[player["player_id"]] = player["player_name"] 
 
 
-    teams_file = os.path.join(result_file_path, f"teams_{leauge}_statsbomb.json")
-    players_file = os.path.join(result_file_path, f"players_{leauge}.json")
+    teams_file = result_file_path + f"teams_{leauge}_statsbomb.json"
+    players_file = result_file_path + f"players_{leauge}.json"
 
     os.makedirs(os.path.dirname(teams_file), exist_ok=True)
     os.makedirs(os.path.dirname(players_file), exist_ok=True)
