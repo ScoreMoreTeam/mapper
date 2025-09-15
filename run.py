@@ -25,7 +25,7 @@ players_fbref = fbref.get_fbref_players(fbref_client, leauge, season)
 # # #---------------------------------------------#
 # # #------------------WhoScored------------------#
 # # #---------------------------------------------#
-# whoscored_client = sd.WhoScored(leagues= leauge, seasons= season)
-# teams_whoscored = whoscored.get_whoscored_teams(whoscored_client, leauge, season)
+whoscored_client = sd.WhoScored(leagues= leauge, seasons= season)
+teams_whoscored = whoscored.get_whoscored_teams(whoscored_client, leauge, season)
 
 
