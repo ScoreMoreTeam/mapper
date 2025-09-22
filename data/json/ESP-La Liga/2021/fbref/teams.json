@@ -1,0 +1,82 @@
+[
+    {
+        "name":"Alavés",
+        "id":"8d6fd021"
+    },
+    {
+        "name":"Athletic Club",
+        "id":"2b390eca"
+    },
+    {
+        "name":"Atlético Madrid",
+        "id":"db3b9613"
+    },
+    {
+        "name":"Barcelona",
+        "id":"206d90db"
+    },
+    {
+        "name":"Betis",
+        "id":"fc536746"
+    },
+    {
+        "name":"Celta Vigo",
+        "id":"f25da7fb"
+    },
+    {
+        "name":"Cádiz",
+        "id":"ee7c297c"
+    },
+    {
+        "name":"Eibar",
+        "id":"bea5c710"
+    },
+    {
+        "name":"Elche",
+        "id":"6c8b07df"
+    },
+    {
+        "name":"Getafe",
+        "id":"7848bd64"
+    },
+    {
+        "name":"Granada",
+        "id":"a0435291"
+    },
+    {
+        "name":"Huesca",
+        "id":"c6c493e6"
+    },
+    {
+        "name":"Levante",
+        "id":"9800b6a1"
+    },
+    {
+        "name":"Osasuna",
+        "id":"03c57e2b"
+    },
+    {
+        "name":"Real Madrid",
+        "id":"53a2f082"
+    },
+    {
+        "name":"Real Sociedad",
+        "id":"e31d1cd9"
+    },
+    {
+        "name":"Sevilla",
+        "id":"ad2be733"
+    },
+    {
+        "name":"Valencia",
+        "id":"dcc91a7b"
+    },
+    {
+        "name":"Valladolid",
+        "id":"17859612"
+    },
+    {
+        "name":"Villarreal",
+        "id":"2a8183b3"
+    }
+]
