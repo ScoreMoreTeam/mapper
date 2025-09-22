@@ -18,9 +18,8 @@ def get_whoscored_teams(whoscored: sd.WhoScored, leauge: str, season: str) -> Li
         schedule[["home_team", "home_team_id"]]
             .drop_duplicates()
             .sort_values(by="home_team")
-            .rename(columns={"home_team_id": "id",  "home_team": "team_name"})       
+            .rename(columns={"home_team_id": "id",  "home_team": "name"})       
     )
     teams.to_json(f'data/json/{leauge}/{season}/whoscored/teams.json', orient='records', force_ascii=False, indent=4)
 
-    print(teams)
-    return teams
+    return teams.to_dict(orient="records")
